@@ -32,24 +32,36 @@ foreach(p LIB BIN INCLUDE CMAKE)
 endforeach()
 
 include_directories("${PROJECT_SOURCE_DIR}")
+include_directories("${PROJECT_SOURCE_DIR}/src")
+include_directories("${PROJECT_SOURCE_DIR}/src/cxx")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 file (GLOB source src/*.c)
+file (GLOB source_cxx src/cxx/*.cxx)
 add_library (msym ${source})
+add_library (msym_cxx ${source_cxx})
 
 if (BUILD_SHARED_LIBS)
 	set_target_properties(msym PROPERTIES
 		POSITION_INDEPENDENT_CODE TRUE
 		C_VISIBILITY_PRESET hidden
 		VISIBILITY_INLINES_HIDDEN 1)
+	set_target_properties(msym_cxx PROPERTIES
+		POSITION_INDEPENDENT_CODE TRUE
+		C_VISIBILITY_PRESET hidden
+		VISIBILITY_INLINES_HIDDEN 1)
 
 else()
 	set_target_properties(msym PROPERTIES COMPILE_FLAGS -DMSYM_EXPORTS_BUILT_AS_STATIC)
+	set_target_properties(msym_cxx PROPERTIES COMPILE_FLAGS -DMSYM_EXPORTS_BUILT_AS_STATIC)
 endif ()
 
 include_directories("${PROJECT_BINARY_DIR}")
 
 set_target_properties(msym PROPERTIES VERSION ${LIBMSYM_VERSION})
 set_target_properties(msym PROPERTIES SOVERSION ${LIBMSYM_MAJOR_VERSION}.${LIBMSYM_MINOR_VERSION})
+set_target_properties(msym_cxx PROPERTIES VERSION ${LIBMSYM_VERSION})
+set_target_properties(msym_cxx PROPERTIES SOVERSION ${LIBMSYM_MAJOR_VERSION}.${LIBMSYM_MINOR_VERSION})
 
 generate_export_header(msym
              BASE_NAME msym
