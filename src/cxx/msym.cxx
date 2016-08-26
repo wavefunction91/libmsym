@@ -1,4 +1,5 @@
 #include <msym.hpp>
+#include <iostream>
 
 void MSym::GetSetElements_(std::vector<msym_element_t> &elements) {
   msym_error_t ret;

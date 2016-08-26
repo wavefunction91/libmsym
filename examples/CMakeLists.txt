@@ -14,7 +14,9 @@ set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 #set (CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -flto" )
 
 add_executable (msym_example msym_example.c example.c)
+add_executable (msym_cxx_example msym_example.cxx example.cxx )
 add_executable (msym_tex tex_character_table)
 
 target_link_libraries (msym_example LINK_PUBLIC msym)
+target_link_libraries (msym_cxx_example LINK_PUBLIC msym_cxx msym)
 target_link_libraries (msym_tex LINK_PUBLIC msym)
