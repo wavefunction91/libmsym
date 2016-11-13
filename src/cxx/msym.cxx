@@ -30,4 +30,15 @@ void MSym::FindSymmetry_(){
     const_cast<char*>(point_group_.c_str()));
 
   ret = msymGetSubgroups(ctx_,&mSubGroupLength_,&mSubGroups_);
+//std::cout << point_group_ << std::endl;
+//for(auto i = 0; i < mSubGroupLength_;i++) std::cout << mSubGroups_[i].name << std::endl;
+};
+
+void MSym::GetEquivalenceSets_(){
+  msym_error_t ret;
+
+  ret = msymGetEquivalenceSets(ctx_,&mEqSetLength_,&mEqSet_);
+  for(auto i = 0; i < mEqSetLength_; i++)
+    std::cout << mEqSet_[i].elements[0]->name 
+              << " (" << mEqSet_[i].length << ")" << std::endl;
 };
