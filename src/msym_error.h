@@ -37,15 +37,15 @@ extern "C" {
         MSYM_POINT_GROUP_ERROR = -16,
         MSYM_SYMMETRIZATION_ERROR = -17,
         MSYM_SUBSPACE_ERROR = -18,
+        MSYM_NO_VLA_ERROR = -127,
         MSYM_MEMORY_ERROR = -128
     };
     
     typedef enum _msym_error msym_error_t;
     
-    const char *msymErrorString(msym_error_t error);
+    const char MSYM_EXPORT *msymErrorString(msym_error_t error);
+    const char MSYM_EXPORT *msymGetErrorDetails();
     void msymSetErrorDetails(const char *format, ...);
-    const char *msymGetErrorDetails();
-    
     
 #ifdef __cplusplus
 }
