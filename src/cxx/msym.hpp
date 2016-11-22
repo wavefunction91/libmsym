@@ -12,6 +12,8 @@ class MSym {
   int                            mSubGroupLength_;
   int                            mEqSetLength_;
 
+  std::vector<msym_basis_function_t> bfs_;
+
   std::array<double,3> cm_;
   double               radius_;
   double               symerr_;
